@@ -199,14 +199,22 @@ SELECT * FROM customer;
 -- In this section you will create various kinds of triggers that work when certain DML statements are executed on a table.
 -- 6.1 AFTER/FOR
 -- Task - Create an after insert trigger on the employee table fired after a new record is inserted into the table.
-
+CREATE TRIGGER employee_update
+AFTER INSERT ON employee
+EXECUTE PROCEDURE suppress_redundant_updates_trigger();
 -- Task – Create an after update trigger on the album table that fires after a row is inserted in the table
-
+CREATE TRIGGER new_album
+AFTER UPDATE ON album
+EXECUTE PROCEDURE suppress_redundant_updates_trigger();
 -- Task – Create an after delete trigger on the customer table that fires after a row is deleted from the table.
-
+CREATE TRIGGER another_on_bites_the_dust
+AFTER DELETE ON comstumer
+EXECUTE PROCEDURE suppress_redundant_updates_trigger();
 -- 6.2 INSTEAD OF
 -- Task – Create an instead of trigger that restricts the deletion of any invoice that is priced over 50 dollars.
-
+CREATE TRIGGER stop_delete
+BEFORE DELETE ON invoice
+EXECUTE PROCEDURE suppress_redundant_updates_trigger();
 -- 7.0 JOINS
 -- In this section you will be working with combing various tables through the use of joins. You will work with outer, inner, right, left, cross, and self joins.
 -- 7.1 INNER
